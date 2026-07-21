@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+    <title>Internship Dashboard</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #f7f7f7; }
+        h1 { margin-bottom: 10px; }
+        .meta { margin-bottom: 20px; }
+        .card {
+            background: white;
+            border: 1px solid #ccc;
+            padding: 12px;
+            margin-bottom: 12px;
+            border-radius: 6px;
+        }
+        .source { font-size: 0.9em; color: #555; }
+        .title { font-weight: bold; font-size: 1.1em; }
+        .time { font-size: 0.85em; color: #777; margin-top: 6px; }
+        a { text-decoration: none; color: #0066cc; }
+        a:hover { text-decoration: underline; }
+        .nav { margin-bottom: 15px; }
+        .nav a { margin-right: 15px; }
+    </style>
+</head>
+<body>
+    <h1>Internship Dashboard</h1>
+
+    <div class="meta">
+        <p>Latest {{ count }} entries. Background scan runs every hour.</p>
+        <p>Status: {{ status }}</p>
+        <p>Last scan: {{ last_scan }}</p>
+    </div>
+
+    <div class="nav">
+        <a href="/status">Status JSON</a>
+        <a href="/results">Raw JSON</a>
+        <a href="/run-once">Run once</a>
+    </div>
+
+    <hr>
+
+    {% for item in items %}
+    <div class="card">
+        <div class="source">{{ item.source }}</div>
+        <div class="title">
+            <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+        </div>
+        <div class="time">Found: {{ item.created_at }}</div>
+    </div>
+    {% endfor %}
+</body>
+</html>
